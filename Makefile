@@ -1,13 +1,20 @@
 CC=clang
+MAIN_BINARY=spell_check
+OBJS=spell.o test.o dictionary.o
+CFLAGS=-I ./hashmap
+VPATH = .:./hashmap
+
+hashmap/%.o : hashmap/%.c
+	$(CC) $(CFLAGS) $< -c -o $@
 
 %.o : %.c
-	$(CC) $< -c -o $@
+	$(CC) $(CFLAGS) $< -c -o $@
 
-spell: spell.o
-	$(CC) -o $@ $< 
+$(MAIN_BINARY): $(OBJS)
+	$(CC) -o $@ $^
 
-test: spell
+test: $(MAIN_BINARY)
 	./$<
 
 clean:
-	rm -rf *.o spell
+	rm -rf *.o $(MAIN_BINARY)
