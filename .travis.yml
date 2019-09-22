@@ -1,0 +1,6 @@
+language: c
+compiler: clang
+sudo: false # only for faster builds
+script:
+  - make
+  - make test
