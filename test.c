@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "dictionary.h"
 
+void iterate_hashtable(hashmap_t hashtable[]);
+void free_hashtable(hashmap_t hashtable[]);
+
 extern hashmap_t hashtable[HASH_SIZE];
 char *misspelled[MAX_MISSPELLED] = {0};
 
