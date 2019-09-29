@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dictionary.h"
-#include "spell.h"
 
 extern hashmap_t hashtable[HASH_SIZE];
 char *misspelled[MAX_MISSPELLED] = {0};
