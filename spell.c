@@ -42,6 +42,16 @@ char* remove_punctuation(char* word) {
 	return (word+start);
 }
 
+bool all_numbers(char *token) {
+	bool allnum = true;
+	for (int i = 0; i < strlen(token); i++) {
+		if (!isdigit(token[i])) {
+			allnum = false;
+		}
+	}
+	return allnum;
+}
+
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 	int num_misspelled = 0;
 	char *line = NULL, *tmp_str = NULL;
@@ -67,7 +77,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 				token = strtok(NULL, " ");
 				continue;
 			}
-			if (!check_word(token, hashtable)) {
+			if (!check_word(token, hashtable) && !all_numbers(token)) {
 				misspelled[num_misspelled] = calloc(strlen(token), 1);
 				strncpy(misspelled[num_misspelled], token, strlen(token));
 				num_misspelled++;

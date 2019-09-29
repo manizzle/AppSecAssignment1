@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	}
 	misspelled_count = check_words(stream, hashtable, misspelled);
 	for (int i = 0; i < misspelled_count; i++) {
-		//printf("misspelled word: %s\n", misspelled[i]);
+		printf("misspelled word: %s\n", misspelled[i]);
 		free(misspelled[i]);
 	}
 	free_hashtable(hashtable);
