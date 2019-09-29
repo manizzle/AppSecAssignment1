@@ -13,8 +13,9 @@ hashmap/%.o : hashmap/%.c
 $(MAIN_BINARY): $(OBJS)
 	$(CC) -o $@ $^
 
-test: $(MAIN_BINARY)
-	./$<
+test: dictionary.o spell.o test_main.o
+	gcc -Wall -o test_main test_main.o spell.o dictionary.o -lcheck -lm -lpthread
+	./test_main
 
 clean:
 	rm -rf *.o $(MAIN_BINARY)
