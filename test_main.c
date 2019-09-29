@@ -1,4 +1,3 @@
-#include <check.h>
 #include "dictionary.h"
 #include <stdlib.h>
 #include <assert.h>
