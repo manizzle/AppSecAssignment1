@@ -142,7 +142,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 	stream = fopen(dictionary_file, "r");
 
 	if (stream == NULL) {
-		perror("fopen failed the file does not exist");
 		return false;
     }
 

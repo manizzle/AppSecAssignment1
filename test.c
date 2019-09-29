@@ -45,7 +45,7 @@ void test_check_words_normal() {
 
 void test_bad_file() {
 	hashmap_t hashtable[HASH_SIZE];
-    load_dictionary("doesnt.exist", hashtable);
+    assert(load_dictionary("doesnt.exist", hashtable) == NULL);
 }
 
 //  ./spell_check a_tale_of_two_cities.txt wordlist.txt
@@ -61,7 +61,6 @@ int main(int argc, char** argv) {
 
 	stream = fopen(argv[1], "r");
 	if (stream == NULL) {
-		perror("fopen failed the file does not exist");
 		return false;
 	}
 	misspelled_count = check_words(stream, hashtable, misspelled);
