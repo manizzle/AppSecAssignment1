@@ -1,6 +1,7 @@
 #include "dictionary.h"
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #define DICTIONARY "wordlist.txt"
 #define TESTDICT "test_worlist.txt"
