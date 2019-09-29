@@ -14,7 +14,7 @@ $(MAIN_BINARY): $(OBJS)
 	$(CC) -o $@ $^
 
 test: dictionary.o spell.o test_main.o
-	gcc -Wall -o test_main test_main.o spell.o dictionary.o -lcheck -lm -lpthread
+	gcc -Wall -o test_main test_main.o spell.o dictionary.o -lm -lpthread
 	./test_main
 
 clean:
