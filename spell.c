@@ -27,7 +27,6 @@ char* remove_punctuation(char* word) {
 			break;
 		}
 	}
-
 	if (start == word_len) {
 		return NULL;
 	}
@@ -56,6 +55,10 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 		char *token = strtok(line, " ");
 	    while (token) {
 			token = remove_punctuation(token);
+			if (!token) {
+				token = strtok(NULL, " ");
+				continue;
+			}
 			if (!strip_nl(token)) {
 				token = strtok(NULL, " ");
 				continue;

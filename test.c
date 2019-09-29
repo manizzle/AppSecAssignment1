@@ -43,6 +43,11 @@ void test_check_words_normal() {
     assert(strcmp(misspelled[2], expected[2]) == 0);
 }
 
+void test_bad_file() {
+	hashmap_t hashtable[HASH_SIZE];
+    load_dictionary("doesnt.exist", hashtable);
+}
+
 //  ./spell_check a_tale_of_two_cities.txt wordlist.txt
 int main(int argc, char** argv) {
 	int misspelled_count = 0;
@@ -68,5 +73,6 @@ int main(int argc, char** argv) {
 
 	test_check_word_normal();
     test_check_words_normal();
+    test_bad_file();
 	return 0;
 }

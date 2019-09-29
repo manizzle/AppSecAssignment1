@@ -12,13 +12,12 @@ hashmap/%.o : hashmap/%.c
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(MAIN_BINARY): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
-
-$(MAIN_BINARY): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ -lm -lpthread
+
+test: $(MAIN_BINARY)
 	./$(MAIN_BINARY) test1.txt wordlist.txt
 	xcrun llvm-profdata merge -o testcov.profdata default.profraw
-	xcrun llvm-cov show ./test -instr-profile=testcov.profdata spell.c
+	xcrun llvm-cov show ./$(MAIN_BINARY) -instr-profile=testcov.profdata spell.c
 
 clean:
-	rm -rf *.o $(MAIN_BINARY) test_main testcov.profdata default.profraw
+	rm -rf *.o $(MAIN_BINARY) testcov.profdata default.profraw
