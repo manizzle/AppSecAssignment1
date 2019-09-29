@@ -55,9 +55,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 		i = 0;
 		char *token = strtok(line, " ");
 	    while (token) {
-			strip_nl(token);
 			token = remove_punctuation(token);
-			if (strlen(token) > LENGTH) {
+			if (!strip_nl(token)) {
+				token = strtok(NULL, " ");
+				continue;
+			}
+			if (strlen(token) > LENGTH || strlen(token) == 0) {
 				token = strtok(NULL, " ");
 				continue;
 			}
@@ -109,16 +112,6 @@ int strip_nl(char* word) {
 		}
 	}
 	return word_len;
-}
-
-int find_node_length(hashmap_t node) {
-	hashmap_t tmp_node = node;
-	int node_count = 0;
-	while (tmp_node) {
-		node_count++;
-		tmp_node = tmp_node->next;
-	}
-	return node_count;
 }
 
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
