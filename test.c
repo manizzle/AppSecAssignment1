@@ -45,7 +45,7 @@ void test_check_words_normal() {
 
 void test_bad_file() {
 	hashmap_t hashtable[HASH_SIZE];
-    assert(load_dictionary("doesnt.exist", hashtable) == true);
+    assert(load_dictionary("doesnt.exist", hashtable) == false);
 }
 
 //  ./spell_check a_tale_of_two_cities.txt wordlist.txt
