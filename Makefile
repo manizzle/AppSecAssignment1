@@ -1,5 +1,5 @@
-#CC=clang
-CC=~/Development/afL/afl-clang
+CC=clang
+#CC=~/Development/afL/afl-clang
 MAIN_BINARY=spell_check
 OBJS=spell.o test.o dictionary.o
 CFLAGS=-I ./hashmap -fprofile-instr-generate -fcoverage-mapping
