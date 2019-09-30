@@ -90,7 +90,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]) {
 }
 
 bool check_word(const char* word, hashmap_t hashtable[]) {
-	int bucket = hash_function(word);
+	unsigned int bucket = (unsigned int) hash_function(word);
 	hashmap_t cursor = hashtable[bucket];
 	int word_len = strlen(word);
 	while (cursor != NULL) {
@@ -102,7 +102,7 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 	char *tmp = calloc(word_len, 1);
 	strncpy(tmp, word, word_len);
 	lower_case(tmp);
-	bucket = hash_function(tmp);
+	bucket = (unsigned int) hash_function(tmp);
 	cursor = hashtable[bucket];
 	while (cursor != NULL) {
 		if (!strncmp(tmp, cursor->word, word_len)) {
@@ -119,7 +119,7 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 int strip_nl(char* word) {
 	int word_len = strlen(word);
 	for (int i = 0; i < word_len; i++) {
-		if (word[i] == '\n') {
+		if (!isprint(word[i])) {
 			word[i] = 0;
 			return i;
 		}
@@ -133,7 +133,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
 	size_t len = 0;
 	ssize_t nread;
 	hashmap_t new_node = NULL, tmp_node = NULL;
-	int bucket = 0;
+	unsigned int bucket = 0;
 
 	for (int i = 0; i < HASH_SIZE; i++) {
 		hashtable[i] = NULL;
@@ -153,7 +153,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]) {
         new_node = calloc(sizeof(node), 1);
         new_node->next = NULL;
         strncpy(new_node->word, line, len);
-        bucket = hash_function(line);
+        bucket = (unsigned int) hash_function(line);
         if (hashtable[bucket] == NULL) {
 			hashtable[bucket] = new_node;
         }
